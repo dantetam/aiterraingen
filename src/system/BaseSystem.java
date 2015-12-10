@@ -4,11 +4,11 @@ import game.Game;
 
 public abstract class BaseSystem {
 
-	private Game game;
+	protected Game main;
 	
-	public BaseSystem(Game main)
+	public BaseSystem(Game game)
 	{
-		game = main;
+		main = game;
 	}
 	
 	public abstract void tick();

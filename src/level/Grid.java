@@ -7,6 +7,8 @@ public class Grid {
 	public Grid(int rows, int cols)
 	{
 		tiles = new Tile[rows][cols];
+		this.rows = rows;
+		this.cols = cols;
 		for (int r = 0; r < rows; r++)
 		{
 			for (int c = 0; c < cols; c++)
@@ -17,6 +19,20 @@ public class Grid {
 				tiles[r][c] = tile;
 			}
 		}
+		colorTilesAverage();
+	}
+	
+	public Tile getTile(int r, int c)
+	{
+		if (r >= 0 && r < tiles.length && c >= 0 && c < tiles[0].length)
+			return tiles[r][c];
+		return null;
+	}
+	public int rows;
+	public int cols;
+	
+	private void colorTilesAverage()
+	{
 		float[][] newShades = new float[rows][cols];
 		for (int r = 0; r < rows; r++)
 		{
@@ -41,13 +57,6 @@ public class Grid {
 				tiles[r][c].shade = newShades[r][c];
 			}
 		}
-	}
-	
-	public Tile getTile(int r, int c)
-	{
-		if (r >= 0 && r < tiles.length && c >= 0 && c < tiles[0].length)
-			return tiles[r][c];
-		return null;
 	}
 	
 }
