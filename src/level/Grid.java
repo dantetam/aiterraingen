@@ -38,12 +38,13 @@ public class Grid {
 		{
 			for (int c = 0; c < cols; c++)
 			{
-				float n = 0;
-				for (int rr = r - 2; rr <= r + 2; rr++)
+				float n = 0; int sight = 1;
+				for (int rr = r - sight; rr <= r + sight; rr++)
 				{
-					for (int cc = c - 2; cc <= c + 2; cc++)
+					for (int cc = c - sight; cc <= c + sight; cc++)
 					{
-						newShades[r][c] += tiles[r][c].shade;
+						if (getTile(rr,cc) == null) continue;
+						newShades[r][c] += tiles[rr][cc].shade;
 						n++;
 					}
 				}
