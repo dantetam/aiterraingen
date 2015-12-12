@@ -1,5 +1,9 @@
 package level;
 
+import java.util.ArrayList;
+
+import entity.BaseEntity;
+
 public class Tile {
 
 	public int row, col;
@@ -8,6 +12,8 @@ public class Tile {
 	public int foodImpr, metalImpr;
 	
 	public float shade;
+	
+	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
 	
 	public Tile(int r, int c)
 	{

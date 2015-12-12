@@ -1,5 +1,7 @@
 package level;
 
+import entity.BaseEntity;
+
 public class Grid {
 
 	private Tile[][] tiles;
@@ -14,12 +16,17 @@ public class Grid {
 			for (int c = 0; c < cols; c++)
 			{
 				Tile tile = new Tile(r,c);
-				tile.start((int)(Math.random()*5), (int)(Math.random()*5));
+				tile.start((int)(Math.random()*6), (int)(Math.random()*6));
 				tile.improve(0, 0);
 				tiles[r][c] = tile;
 			}
 		}
 		colorTilesAverage();
+	}
+	
+	public void move(BaseEntity en, int r, int c)
+	{
+		
 	}
 	
 	public Tile getTile(int r, int c)

@@ -15,7 +15,7 @@ public class Game extends PApplet {
 
 	public Grid grid;
 
-	public float width = 1000, height = 1000;
+	public float width = 1000, height = 1000, textSize = 16;
 
 	public static void main(String[] args)
 	{
@@ -40,6 +40,7 @@ public class Game extends PApplet {
 			System.out.println("Please manually set width and height variables in game class");
 			System.exit(0);
 		}*/
+		textSize(textSize);
 	}
 
 	public void draw()

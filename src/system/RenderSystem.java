@@ -24,6 +24,17 @@ public class RenderSystem extends BaseSystem {
 				main.rect(r*widthR, c*widthC, widthR, widthC);
 			}
 		}
+		for (int r = 0; r < main.grid.rows; r++)
+		{
+			for (int c = 0; c < main.grid.cols; c++)
+			{
+				Tile t = main.grid.getTile(r,c);
+				main.fill(0,255,0);
+				main.text(t.food, r*widthR + main.textSize/2, c*widthC + main.textSize);
+				main.fill(255,150,0);
+				main.text(t.metal, (r+1)*widthR - main.textSize, c*widthC + main.textSize);
+			}
+		}
 	}
 
 }
