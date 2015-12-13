@@ -1,12 +1,14 @@
 package level;
 
 import entity.BaseEntity;
+import game.Civilization;
 
 public class Grid {
 
 	private Tile[][] tiles;
+	public Civilization[] civs;
 	
-	public Grid(int rows, int cols)
+	public Grid(int rows, int cols, int numCivs)
 	{
 		tiles = new Tile[rows][cols];
 		this.rows = rows;
@@ -22,11 +24,25 @@ public class Grid {
 			}
 		}
 		colorTilesAverage();
+		
+		civs = new Civilization[numCivs];
+		for (int i = 0; i < numCivs; i++)
+		{
+			Civilization civ = new Civilization();
+			civs[i] = civ;
+		}
 	}
 	
 	public void move(BaseEntity en, int r, int c)
 	{
-		
+		if (en.location != null)
+			en.location.units.remove(en);
+		Tile t = getTile(r,c);
+		en.location = t; //Could possibly be null
+		if (t != null)
+		{
+			t.units.add(en);
+		}
 	}
 	
 	public Tile getTile(int r, int c)

@@ -16,6 +16,7 @@ public class Game extends PApplet {
 	public Grid grid;
 
 	public float width = 1000, height = 1000, textSize = 16;
+	public int numCivs = 5;
 
 	public static void main(String[] args)
 	{
@@ -29,7 +30,7 @@ public class Game extends PApplet {
 		systems.add(civSystem);
 		systems.add(rSystem);
 
-		grid = new Grid(20,20);
+		grid = new Grid(20,20,numCivs);
 	}
 
 	public void setup()
