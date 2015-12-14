@@ -67,7 +67,7 @@ public class Grid {
 					for (int cc = c - sight; cc <= c + sight; cc++)
 					{
 						if (getTile(rr,cc) == null) continue;
-						newShades[r][c] += tiles[rr][cc].shade;
+						newShades[r][c] += tiles[rr][cc].color.r;
 						n++;
 					}
 				}
@@ -78,7 +78,7 @@ public class Grid {
 		{
 			for (int c = 0; c < cols; c++)
 			{
-				tiles[r][c].shade = newShades[r][c];
+				tiles[r][c].color.set(newShades[r][c]);
 			}
 		}
 	}

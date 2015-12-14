@@ -8,6 +8,8 @@ public class BaseEntity {
 	public Tile location = null;
 	public Civilization owner;
 	
+	public boolean improvement = false;
+	
 	public BaseEntity(Civilization civ)
 	{
 		owner = civ;

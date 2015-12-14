@@ -2,6 +2,7 @@ package game;
 
 import java.util.ArrayList;
 
+import auxil.Color;
 import level.Grid;
 import processing.core.PApplet;
 import system.*;
@@ -50,6 +51,11 @@ public class Game extends PApplet {
 		{
 			systems.get(i).tick();
 		}
+	}
+	
+	public void fill(Color color)
+	{
+		super.fill(color.r, color.g, color.b);
 	}
 
 }

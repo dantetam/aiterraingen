@@ -2,6 +2,7 @@ package level;
 
 import java.util.ArrayList;
 
+import auxil.Color;
 import entity.BaseEntity;
 
 public class Tile {
@@ -11,7 +12,7 @@ public class Tile {
 	public int food, metal;
 	public int foodImpr, metalImpr;
 	
-	public float shade;
+	public Color color;
 	
 	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
 	
@@ -19,7 +20,8 @@ public class Tile {
 	{
 		row = r;
 		col = c;
-		shade = (float)(Math.random()*255f);
+		float shade = (float)(Math.random()*255f);
+		color = new Color(shade,shade,shade);
 	}
 	
 	public void start(int f, int m)
