@@ -7,6 +7,7 @@ import entity.BaseEntity;
 
 public class Tile {
 
+	public Grid grid;
 	public int row, col;
 	
 	public int food, metal;
@@ -16,8 +17,9 @@ public class Tile {
 	
 	public ArrayList<BaseEntity> units = new ArrayList<BaseEntity>();
 	
-	public Tile(int r, int c)
+	public Tile(Grid g, int r, int c)
 	{
+		grid = g;
 		row = r;
 		col = c;
 		float shade = (float)(Math.random()*255f);

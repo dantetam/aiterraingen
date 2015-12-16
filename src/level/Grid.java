@@ -17,7 +17,7 @@ public class Grid {
 		{
 			for (int c = 0; c < cols; c++)
 			{
-				Tile tile = new Tile(r,c);
+				Tile tile = new Tile(this,r,c);
 				tile.start((int)(Math.random()*6), (int)(Math.random()*6));
 				tile.improve(0, 0);
 				tiles[r][c] = tile;
