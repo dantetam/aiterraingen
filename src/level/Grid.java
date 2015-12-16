@@ -1,5 +1,7 @@
 package level;
 
+import java.util.ArrayList;
+
 import entity.BaseEntity;
 import game.Civilization;
 
@@ -7,7 +9,7 @@ public class Grid {
 
 	private Tile[][] tiles;
 	public Civilization[] civs;
-	
+
 	public Grid(int rows, int cols, int numCivs)
 	{
 		tiles = new Tile[rows][cols];
@@ -24,7 +26,7 @@ public class Grid {
 			}
 		}
 		colorTilesAverage();
-		
+
 		civs = new Civilization[numCivs];
 		for (int i = 0; i < numCivs; i++)
 		{
@@ -42,7 +44,7 @@ public class Grid {
 			}
 		}
 	}
-	
+
 	public void move(BaseEntity en, int r, int c)
 	{
 		if (en.location != null)
@@ -54,7 +56,7 @@ public class Grid {
 			t.units.add(en);
 		}
 	}
-	
+
 	public Tile getTile(int r, int c)
 	{
 		if (r >= 0 && r < tiles.length && c >= 0 && c < tiles[0].length)
@@ -63,10 +65,11 @@ public class Grid {
 	}
 	public int rows;
 	public int cols;
-	
-	public Tile[] settlerSpots(Tile t, double dist)
+
+	public Tile[] settlerSpots(Civilization civ, Tile t, double dist, int resultLength)
 	{
-		ArrayList<>
+		ArrayList<Object[]> best = new ArrayList<Object[]>(); //Make a 'tuple' of tile + its score
+		int[][] scores = returnCityScores(civ);
 		for (int r = 0; r < rows; r++)
 		{
 			if (Math.abs(t.row - r) > dist)
@@ -78,10 +81,24 @@ public class Grid {
 				Tile candidate = getTile(r,c); double candidateDist = candidate.dist(t);
 				if (candidateDist <= dist)
 				{
-					
+					int score = scores[r][c];
+					for (int i = 0; i < resultLength; i++)
+					{
+						if (best.size() <= i || (int)best.get(i)[1] < score) //Insert into the list if not of size or better score
+						{
+							best.add(i,new Object[]{candidate,score});
+							if (best.size() > resultLength) //Remove last element when list is sufficient length
+								best.remove(resultLength);
+							break;
+						}
+					}
 				}
 			}
 		}
+		Tile[] tiles = new Tile[resultLength];
+		for (int i = 0; i < resultLength; i++)
+			tiles[i] = (Tile)best.get(i)[0];
+		return tiles;
 	}
 	//Returns the score of a city 5x5 area, ignoring foreign tiles owned by others
 	private int[][] returnCityScores(Civilization civ) 
@@ -107,11 +124,11 @@ public class Grid {
 					{
 						Tile t = getTile(r,c);
 						if (t != null)
-							temp[r][c] += t.food + t.foodImpr + t.metal + t.metalImpr;
+							temp[r][c] += tileScores[rr][cc];
 					}
 		return temp;
 	}
-	
+
 	private void colorTilesAverage()
 	{
 		float[][] newShades = new float[rows][cols];
@@ -140,5 +157,5 @@ public class Grid {
 			}
 		}
 	}
-	
+
 }
