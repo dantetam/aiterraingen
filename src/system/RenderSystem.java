@@ -42,7 +42,7 @@ public class RenderSystem extends BaseSystem {
 						if (en.improvement)
 						{
 							main.fill(en.owner.color);
-							main.rect(r*widthR + widthR/5f, c*widthC + widthR/5f, widthR*0.6f, widthC*0.6f);
+							main.rect(r*widthR + widthR/5f, c*widthC + widthC/5f, widthR*0.6f, widthC*0.6f);
 						}
 					}
 					for (int i = 0; i < t.units.size(); i++)
@@ -51,7 +51,7 @@ public class RenderSystem extends BaseSystem {
 						if (!en.improvement)
 						{
 							main.fill(en.owner.color);
-							main.ellipse(r*widthR + widthR/3f, c*widthC + widthR/3f, widthR/3f, widthC/3f);
+							main.ellipse(r*widthR + widthR/2f, c*widthC + widthC/2f, widthR/3f, widthC/3f);
 						}
 					}
 				}

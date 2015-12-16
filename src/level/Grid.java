@@ -30,6 +30,16 @@ public class Grid {
 		{
 			Civilization civ = new Civilization();
 			civs[i] = civ;
+			for (int j = 0; j < 1; j++)
+			{
+				BaseEntity en = new BaseEntity(civ);
+				Tile t = null;
+				do
+				{
+					t = getTile((int)(Math.random()*tiles.length), (int)(Math.random()*tiles[0].length));
+				} while (t.units.size() != 0);
+				move(en, t.row, t.col);
+			}
 		}
 	}
 	
