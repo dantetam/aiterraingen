@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import auxil.Color;
 import entity.BaseEntity;
+import game.Civilization;
 
 public class Tile {
 
 	public Grid grid;
+	public Civilization owner;
 	public int row, col;
 	
 	public int food, metal;
@@ -36,6 +38,11 @@ public class Tile {
 	{
 		foodImpr = f;
 		metalImpr = m;
+	}
+	
+	public double dist(Tile t)
+	{
+		return Math.sqrt(Math.pow(t.row - row, 2) + Math.pow(t.col - col, 2));
 	}
 	
 }

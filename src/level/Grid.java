@@ -64,6 +64,54 @@ public class Grid {
 	public int rows;
 	public int cols;
 	
+	public Tile[] settlerSpots(Tile t, double dist)
+	{
+		ArrayList<>
+		for (int r = 0; r < rows; r++)
+		{
+			if (Math.abs(t.row - r) > dist)
+				continue;
+			for (int c = 0; c < cols; c++)
+			{
+				if (Math.abs(t.col - c) > dist)
+					continue;
+				Tile candidate = getTile(r,c); double candidateDist = candidate.dist(t);
+				if (candidateDist <= dist)
+				{
+					
+				}
+			}
+		}
+	}
+	//Returns the score of a city 5x5 area, ignoring foreign tiles owned by others
+	private int[][] returnCityScores(Civilization civ) 
+	{
+		int[][] temp = new int[rows][cols];
+		int[][] tileScores = new int[rows][cols];
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				Tile t = getTile(r,c);
+				if (t.owner == null || t.owner.equals(civ))
+					tileScores[r][c] = t.food + t.foodImpr + t.metal + t.metalImpr;
+				else 
+					tileScores[r][c] = 0;
+			}
+		}
+		//I feel like I've written this code before
+		for (int r = 0; r < rows; r++)
+			for (int c = 0; c < cols; c++)
+				for (int rr = r - 2; rr <= r + 2; rr++)
+					for (int cc = c - 2; cc <= c + 2; cc++)
+					{
+						Tile t = getTile(r,c);
+						if (t != null)
+							temp[r][c] += t.food + t.foodImpr + t.metal + t.metalImpr;
+					}
+		return temp;
+	}
+	
 	private void colorTilesAverage()
 	{
 		float[][] newShades = new float[rows][cols];
