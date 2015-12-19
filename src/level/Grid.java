@@ -34,7 +34,7 @@ public class Grid {
 			civs[i] = civ;
 			for (int j = 0; j < 1; j++)
 			{
-				BaseEntity en = new BaseEntity(civ);
+				BaseEntity en = new BaseEntity(civ, "Settler");
 				Tile t = null;
 				do
 				{
@@ -72,12 +72,12 @@ public class Grid {
 		int[][] scores = returnCityScores(civ);
 		for (int r = 0; r < rows; r++)
 		{
-			if (Math.abs(t.row - r) > dist)
+			if (Math.abs(t.row - r) > dist) //Process some tiles out of the way. What was the word...4 letters...curl? whip?...
 				continue;
 			for (int c = 0; c < cols; c++)
 			{
-				if (Math.abs(t.col - c) > dist)
-					continue;
+				if (Math.abs(t.col - c) > dist) //This is so that if dist is a large number, we won't process a huge amount of nonexistent tiles
+					continue; //At most and least, process the entire grid
 				Tile candidate = getTile(r,c); double candidateDist = candidate.dist(t);
 				if (candidateDist <= dist)
 				{
