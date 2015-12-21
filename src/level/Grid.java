@@ -97,7 +97,15 @@ public class Grid {
 		}
 		Tile[] tiles = new Tile[resultLength];
 		for (int i = 0; i < resultLength; i++)
+		{
+			if (i >= best.size())
+			{
+				for (int j = 0; j < resultLength - i; j++)
+					best.add(new Object[]{null,-1});
+				break;
+			}
 			tiles[i] = (Tile)best.get(i)[0];
+		}
 		return tiles;
 	}
 	//Returns the score of a city 5x5 area, ignoring foreign tiles owned by others

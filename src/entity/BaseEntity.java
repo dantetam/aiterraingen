@@ -23,7 +23,8 @@ public class BaseEntity {
 	{
 		if (name.equals("Settler"))
 		{
-			
+			Tile[] locations = location.grid.settlerSpots(owner, location, 10, 5);
+			Tile desired = locations
 		}
 		else 
 		{
