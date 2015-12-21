@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import entity.BaseEntity;
 import game.Civilization;
+import game.Pathfinder;
 
 public class Grid {
 
-	private Tile[][] tiles;
+	protected Tile[][] tiles;
 	public Civilization[] civs;
+	protected Pathfinder pathfinder;
 
 	public Grid(int rows, int cols, int numCivs)
 	{
@@ -27,6 +29,8 @@ public class Grid {
 		}
 		colorTilesAverage();
 
+		pathfinder = new Pathfinder(this);
+		
 		civs = new Civilization[numCivs];
 		for (int i = 0; i < numCivs; i++)
 		{
@@ -55,6 +59,11 @@ public class Grid {
 		{
 			t.units.add(en);
 		}
+	}
+	
+	public ArrayList<Tile> findPath(BaseEntity unit, int a, int b, int c, int d)
+	{
+		return path
 	}
 
 	public Tile getTile(int r, int c)

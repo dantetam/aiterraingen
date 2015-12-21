@@ -30,13 +30,9 @@ public class Pathfinder {
 		{
 			for (int c = 0; c < grid.cols; c++)
 			{
-				if (grid.getTile(r,c).biome != -1)
-				{
-					//nodes[r][c] = new Node(r,c);
-					nodes[r][c].parent = null;
-					nodes[r][c].g = 0;
-					nodes[r][c].queue = 0;
-				}
+				nodes[r][c].parent = null;
+				nodes[r][c].g = 0;
+				nodes[r][c].queue = 0;
 			}
 		}
 		start = nodes[x1][y1];
@@ -62,19 +58,13 @@ public class Pathfinder {
 					cost = current.g + current.dist(ns.get(i));
 				else
 					cost = current.g + 1;
-				/*if (current.r != ns.get(i).r && current.c != ns.get(i).c)
-					cost = current.g + 1.4;
-				else
-					cost = current.g + 1;*/
 				if (openSet.contains(ns.get(i)) && cost < ns.get(i).g)
 				{
 					removeNodeFromOpen(ns.get(i));
 					//closedSet.add(ns.get(i));
 				}
 				if (closedSet.contains(ns.get(i)) && cost < ns.get(i).g)
-				{
 					removeNodeFromClosed(ns.get(i));
-				}
 				if (!openSet.contains(ns.get(i)) && !closedSet.contains(ns.get(i)))
 				{
 					ns.get(i).g = cost;
@@ -91,12 +81,8 @@ public class Pathfinder {
 				}
 			}
 			for (int i = openSet.size() - 1; i >= 0; i--)
-			{
 				if (openSet.get(i).dist(end) > 1.25*start.dist(end))
-				{
 					openSet.remove(i);
-				}
-			}
 			if (openSet.size() == 0) 
 			{
 				//System.err.println("No path found.");
