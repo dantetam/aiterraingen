@@ -117,35 +117,31 @@ public class Grid {
 		}
 		return tiles;
 	}
-	//Returns the score of a city 5x5 area, ignoring foreign tiles owned by others
+	//Returns data for the scores of all possible 5x5 city areas, ignoring foreign tiles owned by others
 	private int[][] returnCityScores(Civilization civ) 
 	{
 		int[][] temp = new int[rows][cols];
 		int[][] tileScores = new int[rows][cols];
 		for (int r = 0; r < rows; r++)
-		{
 			for (int c = 0; c < cols; c++)
-			{
-				Tile t = getTile(r,c);
-				if (t.owner == null || t.owner.equals(civ))
-					tileScores[r][c] = t.food + t.foodImpr + t.metal + t.metalImpr;
-				else 
-					tileScores[r][c] = 0;
-			}
-		}
+				tileScores[r][c] = evalTile(civ,r,c);
 		//I feel like I've written this code before
 		for (int r = 0; r < rows; r++)
 			for (int c = 0; c < cols; c++)
 				for (int rr = r - 2; rr <= r + 2; rr++)
 					for (int cc = c - 2; cc <= c + 2; cc++)
-					{
-						Tile t = getTile(r,c);
-						if (t != null)
+						if (getTile(rr,cc) != null)
 							temp[r][c] += tileScores[rr][cc];
-					}
 		return temp;
 	}
-
+	public int evalTile(Civilization civ, int r, int c)
+	{
+		Tile t = getTile(r,c);
+		if (t.owner == null || t.owner.equals(civ))
+			return t.food + t.foodImpr + t.metal + t.metalImpr;
+		return 0;
+	}
+	
 	private void colorTilesAverage()
 	{
 		float[][] newShades = new float[rows][cols];
