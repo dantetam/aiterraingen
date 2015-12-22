@@ -23,4 +23,9 @@ public class Intelligence {
 		return Math.ceil((double)path.size()/(double)en.maxAction);
 	}
 	
+	public double scoreFromWorkerInTurns(BaseEntity en, int turns)
+	{
+		
+	}
+	
 }

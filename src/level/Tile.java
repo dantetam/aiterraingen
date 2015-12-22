@@ -12,6 +12,7 @@ public class Tile {
 	public Civilization owner;
 	public int row, col;
 	
+	public int biome;
 	public int food, metal;
 	public int foodImpr, metalImpr;
 	
@@ -22,6 +23,7 @@ public class Tile {
 	public Tile(Grid g, int r, int c)
 	{
 		grid = g;
+		biome = (int)(Math.random()*7);
 		row = r;
 		col = c;
 		float shade = (float)(Math.random()*255f);
@@ -38,6 +40,23 @@ public class Tile {
 	{
 		foodImpr = f;
 		metalImpr = m;
+	}
+	
+	public void improveBiome() //Possibly convert biome?
+	{
+		if (biome >= 0 || biome <= 2)
+		{
+			metalImpr = 2;
+		}
+		else if (biome >= 4 || biome <= 6)
+		{
+			foodImpr = 2;
+		}
+		else
+		{
+			foodImpr = 1;
+			metalImpr = 1;
+		}
 	}
 	
 	public double dist(Tile t)
