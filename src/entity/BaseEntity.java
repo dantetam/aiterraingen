@@ -24,6 +24,7 @@ public class BaseEntity {
 
 	public void tick()
 	{
+		if (improvement) return;
 		if (name.equals("Settler"))
 		{
 			if (queueTiles.size() == 0)
@@ -42,7 +43,16 @@ public class BaseEntity {
 			}
 			if (queueTiles.size() > 0)
 			{
-				
+				do
+				{
+					if (queueTiles.size() == 0) break;
+					Tile t = queueTiles.remove(0);
+					location.grid.move(this, t.row, t.col);
+				} while (action > 0);
+			}
+			if (queueTiles.size() == 0)
+			{
+				improvement = true;
 			}
 		}
 		else 

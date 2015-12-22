@@ -63,7 +63,7 @@ public class Grid {
 	
 	public ArrayList<Tile> findPath(BaseEntity unit, int a, int b, int c, int d)
 	{
-		return path
+		return pathfinder.findPath(unit.owner, a, b, c, d, true);
 	}
 
 	public Tile getTile(int r, int c)
