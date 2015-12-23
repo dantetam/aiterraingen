@@ -25,7 +25,13 @@ public class Intelligence {
 	
 	public double scoreFromWorkerInTurns(BaseEntity en, int turns)
 	{
-		
+		while (true)
+		{
+			if (turns <= 0) break;
+			for (int rr = t.row - 2; rr <= t.row + 2; rr++)
+				for (int cc = t.col - 2; cc <= t.col + 2; cc++)
+					if (en.location.grid.getTile(rr,cc) != null)
+		}
 	}
 	
 }
