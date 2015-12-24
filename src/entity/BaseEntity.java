@@ -28,7 +28,26 @@ public class BaseEntity {
 	{
 		if (improvement)
 		{
-			
+			if (queueAction.size() > 0)
+			{
+				Intelligence intel = location.grid.intelligence;
+				Tile settleBest = location.grid.settlerSpots(owner, location, 10, 3)[0];
+				double[] settleData = intel.scoreFromSettlerPerTurn(this, settleBest);
+				double settlerScore = settleData[0]/settleData[1];
+				double workerScore = intel.scoreFromWorkerPerTurn(this, (int)settleData[1]);
+				if (settlerScore >= workerScore)
+				{
+					for (int i = 0; i < 5; i++)
+						queueAction.add("QueueSettler");
+					queueAction.add("MakeSettler");
+				}
+				else
+				{
+					for (int i = 0; i < 5; i++)
+						queueAction.add("QueueWorker");
+					queueAction.add("MakeWorker");
+				}
+			}
 		}
 		else
 		{
