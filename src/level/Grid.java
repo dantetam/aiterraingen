@@ -11,6 +11,7 @@ public class Grid {
 	protected Tile[][] tiles;
 	public Civilization[] civs;
 	protected Pathfinder pathfinder;
+	public Intelligence intelligence;
 
 	public Grid(int rows, int cols, int numCivs)
 	{

@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import entity.BaseEntity;
 
 public class Intelligence {
-
+	
 	//Measure permanent gain over number of turns. Almost like a E/P ratio instead of a P/E. A ROI?
-	public int scoreFromSettlerToTile(BaseEntity en, Tile t) 
+	public double[] scoreFromSettlerPerTurn(BaseEntity en, Tile t) 
 	{
 		double score = 0;
 		for (int rr = t.row - 2; rr <= t.row + 2; rr++)
 			for (int cc = t.col - 2; cc <= t.col + 2; cc++)
 				if (en.location.grid.getTile(rr,cc) != null)
 					score += en.location.grid.evalTile(en.owner, rr, cc);
-		return (int)(score/turnsEntityToTile(en,t));
+		return new double[]{score,turnsEntityToTile(en,t)};
 	}
 
 	public double turnsEntityToTile(BaseEntity en, Tile t)
@@ -23,7 +23,7 @@ public class Intelligence {
 		return Math.ceil((double)path.size()/(double)en.maxAction);
 	}
 
-	public double scoreFromWorkerInTurns(BaseEntity en, int turns)
+	public double scoreFromWorkerPerTurn(BaseEntity en, int turns)
 	{
 		ArrayList<Tile> queueToImpr = new ArrayList<Tile>();
 		int score = 0;
