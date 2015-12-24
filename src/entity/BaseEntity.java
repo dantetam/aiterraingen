@@ -26,66 +26,77 @@ public class BaseEntity {
 
 	public void tick()
 	{
-		if (improvement)
+		do
 		{
-			if (queueAction.size() > 0)
+			if (improvement)
 			{
-				Intelligence intel = location.grid.intelligence;
-				Tile settleBest = location.grid.settlerSpots(owner, location, 10, 3)[0];
-				double[] settleData = intel.scoreFromSettlerPerTurn(this, settleBest);
-				double settlerScore = settleData[0]/settleData[1];
-				double workerScore = intel.scoreFromWorkerPerTurn(this, (int)settleData[1]);
-				if (settlerScore >= workerScore)
+				if (queueAction.size() == 0)
 				{
-					for (int i = 0; i < 5; i++)
-						queueAction.add("QueueSettler");
-					queueAction.add("MakeSettler");
-				}
-				else
-				{
-					for (int i = 0; i < 5; i++)
-						queueAction.add("QueueWorker");
-					queueAction.add("MakeWorker");
-				}
-			}
-		}
-		else
-		{
-			if (name.equals("Settler"))
-			{
-				if (queueTiles.size() == 0)
-				{
-					Tile[] locations = location.grid.settlerSpots(owner, location, 10, 5);
-					for (int i = 0; i < locations.length; i++)
+					Intelligence intel = location.grid.intelligence;
+					Tile settleBest = location.grid.settlerSpots(owner, location, 10, 3)[0];
+					double[] settleData = intel.scoreFromSettlerPerTurn(this, settleBest);
+					double settlerScore = settleData[0]/settleData[1];
+					double workerScore = intel.scoreFromWorkerPerTurn(this, (int)settleData[1]);
+					if (settlerScore >= workerScore)
 					{
-						Tile desired = locations[i];
-						ArrayList<Tile> path = location.grid.findPath(this, location.row, location.col, desired.row, desired.col);
-						if (path != null)
-						{
-							queueTiles = path;
-							break;
-						}
+						for (int i = 0; i < 5; i++)
+							queueAction.add("QueueSettler");
+						queueAction.add("MakeSettler");
+					}
+					else
+					{
+						for (int i = 0; i < 5; i++)
+							queueAction.add("QueueWorker");
+						queueAction.add("MakeWorker");
 					}
 				}
-				if (queueTiles.size() > 0)
+				if (queueAction.size() > 0)
 				{
-					do
+					String actionName = queueAction.remove(0);
+					if (actionName.contains("Queue"))
+						action = 0;
+					else if (actionName.contains("Make"))
+					{
+						BaseEntity en = new BaseEntity(owner, actionName.substring(4));
+						location.grid.move(en, location.row, location.col);
+					}
+				}
+			}
+			else
+			{
+				if (name.equals("Settler"))
+				{
+					if (queueTiles.size() == 0)
+					{
+						Tile[] locations = location.grid.settlerSpots(owner, location, 10, 5);
+						for (int i = 0; i < locations.length; i++)
+						{
+							Tile desired = locations[i];
+							ArrayList<Tile> path = location.grid.findPath(this, location.row, location.col, desired.row, desired.col);
+							if (path != null)
+							{
+								queueTiles = path;
+								break;
+							}
+						}
+					}
+					if (queueTiles.size() > 0)
 					{
 						if (queueTiles.size() == 0) break;
 						Tile t = queueTiles.remove(0);
 						location.grid.move(this, t.row, t.col);
-					} while (action > 0);
+					}
+					if (queueTiles.size() == 0)
+					{
+						improvement = true;
+					}
 				}
-				if (queueTiles.size() == 0)
+				else 
 				{
-					improvement = true;
+					System.err.println("No action for unit named " + name);
 				}
 			}
-			else 
-			{
-				System.err.println("No action for unit named " + name);
-			}
-		}
+		} while (action > 0);
 	}
 
 }
