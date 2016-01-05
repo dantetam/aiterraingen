@@ -8,12 +8,31 @@ public class MinimaxTree {
 
 	public static void main(String[] args)
 	{
+		new MinimaxTree().test();
+	}
+	
+	public void test()
+	{
 		int levelsBelow = 5;
 		for (int i = 0; i < levelsBelow; i++)
 		{
 			//Find node of level i
-			ArrayList<Node> nodes = findNodesDepth(0); Remember to commit code on day of 1/5/2016
-			populateNodeChildren(i,-i);
+			ArrayList<Node> nodes = findNodesDepth(null, i);
+			if (nodes.size() == 0) {System.err.println("Empty list"); break;}
+			NodeType type = NodeType.MAX;
+			if (i == levelsBelow - 1) type = NodeType.TERM;
+			else if (nodes.get(0).type == NodeType.MAX) type = NodeType.MIN;
+			for (int j = 0; j < nodes.size(); j++)
+				populateNodeChildren(nodes.get(i),type,i*j,-i*j);
+		}
+	}
+	
+	public void populateNodeChildren(Node node, NodeType type, int... children)
+	{
+		for (int i = 0; i < children.length; i++)
+		{
+			Node newNode = new Node(type, children[i]);
+			node.children.add(newNode);
 		}
 	}
 	
