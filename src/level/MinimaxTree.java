@@ -1,6 +1,7 @@
 package level;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class MinimaxTree extends Tree {
 
@@ -8,7 +9,7 @@ public class MinimaxTree extends Tree {
 	
 	public static void main(String[] args)
 	{
-		new MinimaxTree(5).test();
+		new MinimaxTree(4).test();
 	}
 	
 	public MinimaxTree(int levels)
@@ -22,13 +23,13 @@ public class MinimaxTree extends Tree {
 			if (nodes.size() == 0) {System.err.println("Empty list"); break;}
 			//Add appropriate nodes
 			/*
-				   MIN
-				   / \
-				 MAX MAX
-				/ |   | \
-			 MIN MIN MIN MIN
-			       ...
-	       TERM TERM TERM TERM
+					   MIN
+					   / \
+					 MAX MAX
+					/ |   | \
+				 MIN MIN MIN MIN
+				       ...
+		       TERM TERM TERM TERM
 			 */
 			NodeType type = NodeType.MAX; 
 			if (i == levelsBelow - 1) type = NodeType.TERM;
@@ -37,11 +38,21 @@ public class MinimaxTree extends Tree {
 				populateNodeChildren(nodes.get(i),type,i*j,i*j*2);
 		}
 		clearAllButTerminal();
+		determineIntermediates(first);
+	}
+	
+	public void determineIntermediates(Node node)
+	{
+		if (node.type == NodeType.MIN)
+		{
+			node.value = node.least(new Comparator<Node>());
+		}
 	}
 
 	public void test()
 	{
 		printDepthTraverse();
+		determineIntermediates();
 	}
 
 }
