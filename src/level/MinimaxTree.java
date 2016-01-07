@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class MinimaxTree extends Tree {
 
-	public Node first = new Node(NodeType.MIN, 0);
-
 	public static void main(String[] args)
 	{
 		new MinimaxTree().test();
+	}
+	
+	public MinimaxTree()
+	{
+		first = new Node(NodeType.MIN, 0);
 	}
 
 	public void test()

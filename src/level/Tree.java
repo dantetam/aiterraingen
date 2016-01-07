@@ -25,16 +25,9 @@ public class Tree {
 		}
 	}
 	
-	public void setValuesChildren(Node node, int value)
-	{
-		for (Node n: node.children)
-		{
-			n.value = value;
-		}
-	}
-	
 	public void clearAllButTerminal()
 	{
+		//ALT: A recursive that simply calls children. Preorder traversal
 		ArrayList<ArrayList<Node>> nodeSets = new ArrayList<ArrayList<Node>>();
 		int depth = 0; //Find depth of lowest member
 		while (true)
