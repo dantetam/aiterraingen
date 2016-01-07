@@ -45,14 +45,26 @@ public class MinimaxTree extends Tree {
 	{
 		if (node.type == NodeType.MIN)
 		{
-			node.value = node.least(new Comparator<Node>());
+			node.value = node.least().value;
 		}
+		else if (node.type == NodeType.MAX)
+		{
+			node.value = node.greatest().value;
+		}
+		else if (node.type == NodeType.TERM)
+		{
+			return;
+		}
+		else
+			System.err.println("Invalid node type of " + node.toString() + " for minimax tree");
+		for (Node child: node.children)
+			determineIntermediates(child);
 	}
 
 	public void test()
 	{
 		printDepthTraverse();
-		determineIntermediates();
+		determineIntermediates(first);
 	}
 
 }
