@@ -37,9 +37,11 @@ public class Tree {
 			nodeSets.add(nodes); //Store sets so we can traverse them later
 			depth++;
 		}
-		for (ArrayList<Node> nodes: nodeSets)
-			for (Node node: nodes)
+		for (int i = 0; i < depth-1; i++)
+		{
+			for (Node node: nodeSets.get(i))
 				node.value = -9999;
+		}
 	}
 
 	//Depth traversal
@@ -59,6 +61,23 @@ public class Tree {
 				for (Node n: node.children)
 					newNodes.add(n);
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
+		}
+	}
+	
+	public void printDepthTraverse()
+	{
+		int i = 0;
+		while (true)
+		{
+			ArrayList<Node> nodes = findNodesDepth(null, i);
+			if (nodes.isEmpty()) break;
+			for (int j = 0; j < nodes.size(); j++)
+			{
+				Node node = nodes.get(j);
+				System.out.print(node.toString() + " ");
+			}
+			System.out.println();
+			i++;
 		}
 	}
 

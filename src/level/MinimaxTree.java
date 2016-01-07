@@ -4,19 +4,17 @@ import java.util.ArrayList;
 
 public class MinimaxTree extends Tree {
 
+	int levelsBelow;
+	
 	public static void main(String[] args)
 	{
-		new MinimaxTree().test();
+		new MinimaxTree(5).test();
 	}
 	
-	public MinimaxTree()
+	public MinimaxTree(int levels)
 	{
+		levelsBelow = levels;
 		first = new Node(NodeType.MIN, 0);
-	}
-
-	public void test()
-	{
-		int levelsBelow = 5;
 		for (int i = 0; i < levelsBelow; i++)
 		{
 			//Find node of level i
@@ -38,17 +36,12 @@ public class MinimaxTree extends Tree {
 			for (int j = 0; j < nodes.size(); j++)
 				populateNodeChildren(nodes.get(i),type,i*j,i*j*2);
 		}
-		for (int i = 0; i <= levelsBelow; i++)
-		{
-			ArrayList<Node> nodes = findNodesDepth(null, i);
-			for (int j = 0; j < nodes.size(); j++)
-			{
-				Node node = nodes.get(j);
-				System.out.print(node.toString() + " ");
-			}
-			System.out.println();
-		}
 		clearAllButTerminal();
+	}
+
+	public void test()
+	{
+		printDepthTraverse();
 	}
 
 }
