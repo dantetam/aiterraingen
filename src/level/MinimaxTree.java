@@ -6,12 +6,12 @@ import java.util.Comparator;
 public class MinimaxTree extends Tree {
 
 	int levelsBelow;
-	
+
 	public static void main(String[] args)
 	{
 		new MinimaxTree(4).test();
 	}
-	
+
 	public MinimaxTree(int levels)
 	{
 		levelsBelow = levels;
@@ -35,20 +35,24 @@ public class MinimaxTree extends Tree {
 			if (i == levelsBelow - 1) type = NodeType.TERM;
 			else if (nodes.get(0).type == NodeType.MAX) type = NodeType.MIN;
 			for (int j = 0; j < nodes.size(); j++)
-				populateNodeChildren(nodes.get(i),type,i*j,i*j*2);
+				populateNodeChildren(nodes.get(j),type,i*j + (int)(Math.random()*50),i*j*2 + (int)(Math.random()*50));
 		}
 		clearAllButTerminal();
-		determineIntermediates(first);
 	}
-	
+
+	//Pre-order traversal
 	public void determineIntermediates(Node node)
 	{
 		if (node.type == NodeType.MIN)
 		{
+			for (Node child: node.children)
+				determineIntermediates(child);
 			node.value = node.least().value;
 		}
 		else if (node.type == NodeType.MAX)
 		{
+			for (Node child: node.children)
+				determineIntermediates(child);
 			node.value = node.greatest().value;
 		}
 		else if (node.type == NodeType.TERM)
@@ -57,14 +61,15 @@ public class MinimaxTree extends Tree {
 		}
 		else
 			System.err.println("Invalid node type of " + node.toString() + " for minimax tree");
-		for (Node child: node.children)
-			determineIntermediates(child);
+		/*for (Node child: node.children)
+			determineIntermediates(child);*/
 	}
 
 	public void test()
 	{
 		printDepthTraverse();
 		determineIntermediates(first);
+		printDepthTraverse();
 	}
 
 }
