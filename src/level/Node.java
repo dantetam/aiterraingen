@@ -7,7 +7,7 @@ public class Node
 {
 	public NodeType type;
 	public int value;
-	public ArrayList<Node> children = new ArrayList<Node>();
+	public ArrayList<Link> children = new ArrayList<Link>();
 	
 	public String toString()
 	{
@@ -28,16 +28,16 @@ public class Node
 	
 	public Node least() {return leastOrGreatest(-1);}
 	public Node greatest() {return leastOrGreatest(1);}
-	private Node leastOrGreatest(int value) //>= 1 for greatest, <= -1 for least
+	protected Node leastOrGreatest(int value) //>= 1 for greatest, <= -1 for least
 	{
 		value = (int)Math.signum(value);
 		if (children.isEmpty())
 			return null;
-		Node candidate = children.get(0);
+		Node candidate = children.get(0).node;
 		if (children.size() == 1) return candidate;
 		for (int i = 1; i < children.size(); i++)
 		{
-			if (Math.signum(children.get(i).compareTo(candidate)) == value) candidate = children.get(i);
+			if (Math.signum(children.get(i).node.compareTo(candidate)) == value) candidate = children.get(i).node;
 		}
 		return candidate;
 	}

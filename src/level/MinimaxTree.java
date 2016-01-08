@@ -45,15 +45,18 @@ public class MinimaxTree extends Tree {
 	{
 		if (node.type == NodeType.MIN)
 		{
-			for (Node child: node.children)
-				determineIntermediates(child);
-			node.value = node.least().value;
+			for (Link link: node.children)
+				determineIntermediates(link.node);
+			Node least = node.least();
+			node.value = least.value;
+			
 		}
 		else if (node.type == NodeType.MAX)
 		{
-			for (Node child: node.children)
-				determineIntermediates(child);
-			node.value = node.greatest().value;
+			for (Link link: node.children)
+				determineIntermediates(link.node);
+			Node greatest = node.greatest();
+			node.value = greatest.value;
 		}
 		else if (node.type == NodeType.TERM)
 		{
