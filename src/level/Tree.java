@@ -13,7 +13,7 @@ public class Tree {
 
 	public void test()
 	{
-	
+
 	}
 
 	public void populateNodeChildren(Node node, NodeType type, int... children)
@@ -21,10 +21,10 @@ public class Tree {
 		for (int i = 0; i < children.length; i++)
 		{
 			Node newNode = new Node(type, children[i]);
-			node.children.add(newNode);
+			node.children.add(new Link(newNode));
 		}
 	}
-	
+
 	public void clearAllButTerminal()
 	{
 		//ALT: A recursive that simply calls children. Preorder traversal
@@ -58,12 +58,12 @@ public class Tree {
 		{
 			ArrayList<Node> newNodes = new ArrayList<Node>();
 			for (Node node: nodes)
-				for (Node n: node.children)
-					newNodes.add(n);
+				for (Link link: node.children)
+					newNodes.add(link.node);
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
 		}
 	}
-	
+
 	public void printDepthTraverse()
 	{
 		int i = 0;
@@ -74,7 +74,19 @@ public class Tree {
 			for (int j = 0; j < nodes.size(); j++)
 			{
 				Node node = nodes.get(j);
-				System.out.print(node.toString() + " ");
+				if (node.parent != null)
+				{
+					if (node.parent.preferred)
+					{
+						System.out.print(node.toString() + "< ");
+					}
+					else
+					{
+						System.out.print(node.toString() + "  ");
+					}
+				}
+				else
+					System.out.print(node.toString() + "  ");
 			}
 			System.out.println();
 			i++;

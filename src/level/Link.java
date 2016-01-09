@@ -9,6 +9,7 @@ public class Link {
 	public Link(Node n)
 	{
 		node = n;
+		n.parent = this;
 	}
 	
 }

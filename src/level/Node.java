@@ -7,6 +7,7 @@ public class Node
 {
 	public NodeType type;
 	public int value;
+	public Link parent;
 	public ArrayList<Link> children = new ArrayList<Link>();
 	
 	public String toString()
