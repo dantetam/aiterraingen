@@ -63,6 +63,19 @@ public class Tree {
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
 		}
 	}
+	
+	public ArrayList<Node> findPathOfPreference(Node node)
+	{
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		nodes.add(node);
+		for (Link link: node.children)
+			if (link.preferred)
+			{
+				nodes.add()
+			}
+		return nodes;
+	}
+	private void
 
 	public void printDepthTraverse()
 	{
