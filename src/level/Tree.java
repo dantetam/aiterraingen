@@ -64,19 +64,41 @@ public class Tree {
 		}
 	}
 	
-	public ArrayList<Node> findPathOfPreference(Node node)
+	private ArrayList<Node> chosen;
+	private void findPathOfPreference(Node node)
 	{
-		ArrayList<Node> nodes = new ArrayList<Node>();
-		nodes.add(node);
+		chosen = new ArrayList<Node>();
+		chosen.add(node);
+		if (node.children.isEmpty()) return;
 		for (Link link: node.children)
 			if (link.preferred)
 			{
-				nodes.add()
+				/*ArrayList<Node> otherNodes = findPathOfPreference(link.node);
+				for (Node n: otherNodes)
+					nodes.add(n);*/
+				findPathOfPreference(link.node);
+				break;
 			}
-		return nodes;
 	}
-	private void
-
+	public ArrayList<Node> fixPreference(Node n)
+	{
+		findPathOfPreference(first);
+		int i = 0;
+		while (true)
+		{
+			ArrayList<Node> nodes = findNodesDepth(null, i);
+			if (nodes.isEmpty()) break;
+			for (int j = 0; j < nodes.size(); j++)
+			{
+				Node node = nodes.get(j);
+				if (!chosen.contains(node))
+					node.parent.preferred = false;
+			}
+			i++;
+		}
+		return chosen;
+	}
+	
 	public void printDepthTraverse()
 	{
 		int i = 0;
