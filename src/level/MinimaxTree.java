@@ -74,6 +74,8 @@ public class MinimaxTree extends Tree {
 		printDepthTraverse();
 		determineIntermediates(first);
 		printDepthTraverse();
+		fixPreference(first);
+		printDepthTraverse();
 	}
 
 }

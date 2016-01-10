@@ -91,7 +91,7 @@ public class Tree {
 			for (int j = 0; j < nodes.size(); j++)
 			{
 				Node node = nodes.get(j);
-				if (!chosen.contains(node))
+				if (!chosen.contains(node) && node.parent != null)
 					node.parent.preferred = false;
 			}
 			i++;
