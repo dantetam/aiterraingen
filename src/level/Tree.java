@@ -45,6 +45,10 @@ public class Tree {
 	}
 
 	//Depth traversal
+	public ArrayList<Node> findNodesDepth(int depth)
+	{
+		return findNodesDepth(null, depth);
+	}
 	public ArrayList<Node> findNodesDepth(ArrayList<Node> nodes, int depth)
 	{
 		if (nodes == null)
