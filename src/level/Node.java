@@ -15,6 +15,7 @@ public class Node
 		String temp = "m";
 		if (type == NodeType.MAX) temp = "M";
 		else if (type == NodeType.TERM) temp = "T";
+		if (parent != null && parent.linkValue != -9999)
 		if (value == -9999)
 			return temp + ":X";
 		return temp + ":" + value;
