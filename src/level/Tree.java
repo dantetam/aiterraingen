@@ -83,9 +83,9 @@ public class Tree {
 	public ArrayList<Node> fixPreference(Node n)
 	{
 		ArrayList<Node> chosen = findPathOfPreference(null, first);
-		for (Node node: chosen)
+		/*for (Node node: chosen)
 			System.out.print(">>> " + node.toString() + " ");
-		System.out.println();
+		System.out.println();*/
 		int i = 0;
 		while (true)
 		{
