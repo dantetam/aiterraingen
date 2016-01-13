@@ -6,7 +6,7 @@ import java.util.Comparator;
 public class Node
 {
 	public NodeType type;
-	public int value;
+	public double value;
 	public Link parent;
 	public ArrayList<Link> children = new ArrayList<Link>();
 
@@ -18,12 +18,12 @@ public class Node
 		if (parent != null && parent.linkValue != -9999)
 		if (value == -9999)
 			return temp + ":X";
-		return temp + ":" + value;
+		return temp + ":" + (int)value;
 	}
 
 	public int compareTo(Node node)
 	{
-		return new Integer(value).compareTo(node.value);
+		return new Double(value).compareTo(node.value);
 	}
 
 	public Node(NodeType t, int v) {type = t; value = v;}
