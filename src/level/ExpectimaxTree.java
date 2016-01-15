@@ -65,5 +65,40 @@ public class ExpectimaxTree extends MinimaxTree {
 		/*for (Node child: node.children)
 				determineIntermediates(child);*/
 	}
+	
+	public void printDepthTraverse()
+	{
+		int i = 0;
+		while (true)
+		{
+			String stringy = "";
+			ArrayList<Node> nodes = findNodesDepth(null, i);
+			if (nodes.isEmpty()) break;
+			for (int j = 0; j < nodes.size(); j++)
+			{
+				Node node = nodes.get(j);
+				stringy = node.toString();
+				if (node.parent != null)
+				{
+					if (node.parent.linkValue == -9999)
+						stringy += " V:X";
+					else
+						stringy += " " + (int)(node.parent.linkValue*10)/10D;
+					if (node.parent.preferred)
+					{
+						System.out.print(stringy + "< ");
+					}
+					else
+					{
+						System.out.print(stringy + "  ");
+					}
+				}
+				else
+					System.out.print(stringy + "  ");
+			}
+			System.out.println();
+			i++;
+		}
+	}
 
 }
