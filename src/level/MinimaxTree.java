@@ -9,10 +9,10 @@ public class MinimaxTree extends Tree {
 
 	public static void main(String[] args)
 	{
-		new MinimaxTree(5).test();
+		new MinimaxTree(5, 3).test();
 	}
 
-	public MinimaxTree(int levels)
+	public MinimaxTree(int levels, int branching)
 	{
 		levelsBelow = levels;
 		first = new Node(NodeType.MIN, 0);
@@ -36,7 +36,12 @@ public class MinimaxTree extends Tree {
 				if (i == levelsBelow - 2) type = NodeType.TERM;
 				else if (nodes.get(0).type == NodeType.MAX) type = NodeType.MIN;
 				for (int j = 0; j < nodes.size(); j++)
-					populateNodeChildren(nodes.get(j),type,i*j + (int)(Math.random()*50),i*j*2 + (int)(Math.random()*50));
+				{
+					int[] children = new int[branching];
+					for (int k = 0; k < branching; k++)
+						children[k] = i*j*k + (int)(Math.random()*50);
+					populateNodeChildren(nodes.get(j),type,children);
+				}
 			}
 		clearAllButTerminal();
 	}

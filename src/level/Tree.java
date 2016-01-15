@@ -16,7 +16,7 @@ public class Tree {
 
 	}
 
-	public void populateNodeChildren(Node node, NodeType type, int... children)
+	public void populateNodeChildren(Node node, NodeType type, int[] children)
 	{
 		for (int i = 0; i < children.length; i++)
 		{
