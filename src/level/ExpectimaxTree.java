@@ -47,7 +47,7 @@ public class ExpectimaxTree extends MinimaxTree {
 			for (Link link: node.children)
 				determineIntermediates(link.node);
 			calculateExpected(node);
-			node.greatest().parent.preferred = true;
+			node.least().parent.preferred = true;
 		}
 		else if (node.type == NodeType.MAX)
 		{
