@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class NodeType {
 	public static ArrayList<String> allTypes = new ArrayList<String>();
+	public String type = "";
 	
 	public static void init()
 	{
@@ -17,8 +18,12 @@ public class NodeType {
 			allTypes.add("MAXNUM"+i);
 	}
 	
-	public NodeType()
+	public NodeType(String t)
 	{
-		
+		type = t;
 	}
+	
+	
+	public boolean equals(String t) {return type.equals(t);}
+	
 }

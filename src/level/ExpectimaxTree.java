@@ -42,21 +42,21 @@ public class ExpectimaxTree extends MinimaxTree {
 	//Pre-order traversal
 	public void determineIntermediates(Node node)
 	{
-		if (node.type == NodeType.MIN)
+		if (node.type.equals("MIN"))
 		{
 			for (Link link: node.children)
 				determineIntermediates(link.node);
 			calculateExpected(node);
 			node.least().parent.preferred = true;
 		}
-		else if (node.type == NodeType.MAX)
+		else if (node.type.equals("MAX"))
 		{
 			for (Link link: node.children)
 				determineIntermediates(link.node);
 			calculateExpected(node);
 			node.greatest().parent.preferred = true;
 		}
-		else if (node.type == NodeType.TERM)
+		else if (node.type.equals("TERM"))
 		{
 			return;
 		}

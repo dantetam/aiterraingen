@@ -15,7 +15,7 @@ public class MinimaxTree extends Tree {
 	public MinimaxTree(int levels, int branching)
 	{
 		levelsBelow = levels;
-		first = new Node(NodeType.MIN, 0);
+		first = new Node(new NodeType("MIN"), 0);
 		if (levelsBelow > 1) 
 			for (int i = 0; i < levelsBelow - 1; i++)
 			{
@@ -32,9 +32,9 @@ public class MinimaxTree extends Tree {
 				       ...
 		       TERM TERM TERM TERM
 				 */
-				NodeType type = NodeType.MAX; 
-				if (i == levelsBelow - 2) type = NodeType.TERM;
-				else if (nodes.get(0).type == NodeType.MAX) type = NodeType.MIN;
+				NodeType type = new NodeType("MAX");
+				if (i == levelsBelow - 2) type = new NodeType("TERM");
+				else if (nodes.get(0).type.equals("MAX")) type = new NodeType("MIN");
 				for (int j = 0; j < nodes.size(); j++)
 				{
 					int[] children = new int[branching];
@@ -49,7 +49,7 @@ public class MinimaxTree extends Tree {
 	//Pre-order traversal
 	public void determineIntermediates(Node node)
 	{
-		if (node.type == NodeType.MIN)
+		if (node.type.equals("MIN"))
 		{
 			for (Link link: node.children)
 				determineIntermediates(link.node);
@@ -57,7 +57,7 @@ public class MinimaxTree extends Tree {
 			node.value = least.value;
 			least.parent.preferred = true;
 		}
-		else if (node.type == NodeType.MAX)
+		else if (node.type.equals("MAX"))
 		{
 			for (Link link: node.children)
 				determineIntermediates(link.node);
@@ -65,7 +65,7 @@ public class MinimaxTree extends Tree {
 			node.value = greatest.value;
 			greatest.parent.preferred = true;
 		}
-		else if (node.type == NodeType.TERM)
+		else if (node.type.equals("TERM"))
 		{
 			return;
 		}
