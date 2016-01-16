@@ -15,6 +15,7 @@ public class Node
 		String temp = "m";
 		if (type.equals("MAX")) temp = "M";
 		else if (type.equals("TERM")) temp = "T";
+		else if (type.contains("MAXNUM")) temp = type.toString().substring(6);
 		if (parent != null && parent.linkValue != -9999)
 		if (value == -9999)
 			return temp + ":X";

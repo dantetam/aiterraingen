@@ -7,9 +7,9 @@ public class MultipleMaxTree extends Tree {
 	public static void main(String[] args)
 	{
 		int competitors = 3;
-		NodeType.init();
+		//NodeType.init();
 		NodeType.initNumberMax(competitors);
-		new MultipleMaxTree(competitors, 3, 1).test();
+		new MultipleMaxTree(competitors, 2, 1).test();
 	}
 	
 	public MultipleMaxTree(int people, int branching, int setsLevels)
@@ -23,17 +23,21 @@ public class MultipleMaxTree extends Tree {
 				int[] children = new int[branching];
 				for (int k = 0; k < branching; k++)
 				{
-					children[i] = (int)(Math.random()*50);
+					children[k] = (int)(Math.random()*50);
 				}
 				NodeType type = new NodeType("MAXNUM"+j);
 				for (int k = 0; k < parents.size(); k++)
 				{
 					populateNodeChildren(parents.get(k),type,children);
-				}
+				} 
+				/*Remember to choose nodes based of dynamic cooperation and competition. 
+				Have weights set in certain personalities for:
+				cooperation, competition, willingness to help others, and willingness to return gifts, 
+				loyalty, forgiveness (both for competition and treachery.), etc.*/
 			}
 		}
 
-		clearAllButTerminal();
+		//clearAllButTerminal();
 	}
 	
 	public void test()
