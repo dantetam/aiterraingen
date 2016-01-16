@@ -20,7 +20,13 @@ public class NodeType {
 	
 	public NodeType(String t)
 	{
-		type = t;
+		if (!allTypes.contains(t))
+		{
+			System.err.println("Invalid type: " + t);
+			type = null;
+		}
+		else
+			type = t;
 	}
 	
 	

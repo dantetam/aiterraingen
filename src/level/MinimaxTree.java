@@ -9,6 +9,7 @@ public class MinimaxTree extends Tree {
 
 	public static void main(String[] args)
 	{
+		NodeType.init();
 		new MinimaxTree(5, 3).test();
 	}
 
