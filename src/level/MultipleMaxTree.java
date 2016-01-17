@@ -45,10 +45,22 @@ public class MultipleMaxTree extends Tree {
 					values[j] = current.value;
 					current = current.parent.upperNode;
 				}
+				Node parent = node.parent.upperNode;
+				clearNodeChild(parent, node);
+				populateNodeChildren(parent, type, values);
 			}
 		}
 
 		//clearAllButTerminal();
+	}
+	
+	public void populateNodeChildren(Node node, NodeType type, int[] children)
+	{
+		for (int i = 0; i < children.length; i++)
+		{
+			Node newNode = new Node(type, children[i]);
+			node.children.add(new Link(newNode));
+		}
 	}
 
 	public void test()
