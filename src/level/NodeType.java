@@ -10,7 +10,7 @@ public class NodeType {
 	public static void init()
 	{
 		init = true;
-		String[] temp = {"MIN", "MAX", "TERM", "CHANCE"};
+		String[] temp = {"MIN", "MAX", "TERM", "CHANCE", "MULTI"};
 		for (String s: temp)
 			allTypes.add(s);
 	}
