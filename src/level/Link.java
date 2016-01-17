@@ -2,13 +2,14 @@ package level;
 
 public class Link {
 
-	public Node node;
+	public Node upperNode, lowerNode;
 	public double linkValue = -9999;
 	public boolean preferred = false;
 	
-	public Link(Node n)
+	public Link(Node upper, Node lower)
 	{
-		node = n;
+		upperNode = upper;
+		lowerNode = lower;
 		n.parent = this;
 	}
 	

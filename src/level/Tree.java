@@ -24,6 +24,27 @@ public class Tree {
 			node.children.add(new Link(newNode));
 		}
 	}
+	
+	public void clearNodeChild(Node node, Node child)
+	{
+		Link link = child.parent;
+		clearNodeLink(node,link);
+	}
+	public void clearNodeLink(Node node, Link link) 
+	{
+		link.node.value = -9999;
+		link.node.parent = null;
+		link.node = null;
+		node.children.remove(link);
+	}
+	public void clearAllNodeChildren(Node node)
+	{
+		for (int i = 0; i < node.children.size(); i++)
+		{
+			clearNodeLink(node, node.children.get(i));
+		}
+		node.children.clear();
+	}
 
 	public void clearAllButTerminal()
 	{
