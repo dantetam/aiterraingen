@@ -18,6 +18,7 @@ public class MultiNode extends Node {
 	public String toString()
 	{
 		String temp = "";
+		if (values == null) return "T:X";
 		for (double d: values)
 			temp += (int)d + ",";
 		temp = "T:" + temp;

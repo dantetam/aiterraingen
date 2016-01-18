@@ -35,7 +35,7 @@ public class ExpectimaxTree extends MinimaxTree {
 		if (node.children.size() == 0) return;
 		double sum = 0;
 		for (Link link: node.children)
-			sum += link.linkValue*link.node.value;
+			sum += link.linkValue*link.lowerNode.value;
 		node.value = sum;
 	}
 
@@ -45,14 +45,14 @@ public class ExpectimaxTree extends MinimaxTree {
 		if (node.type.equals("MIN"))
 		{
 			for (Link link: node.children)
-				determineIntermediates(link.node);
+				determineIntermediates(link.lowerNode);
 			calculateExpected(node);
 			node.least().parent.preferred = true;
 		}
 		else if (node.type.equals("MAX"))
 		{
 			for (Link link: node.children)
-				determineIntermediates(link.node);
+				determineIntermediates(link.lowerNode);
 			calculateExpected(node);
 			node.greatest().parent.preferred = true;
 		}

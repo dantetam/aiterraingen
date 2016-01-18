@@ -53,7 +53,7 @@ public class MinimaxTree extends Tree {
 		if (node.type.equals("MIN"))
 		{
 			for (Link link: node.children)
-				determineIntermediates(link.node);
+				determineIntermediates(link.lowerNode);
 			Node least = node.least();
 			node.value = least.value;
 			least.parent.preferred = true;
@@ -61,7 +61,7 @@ public class MinimaxTree extends Tree {
 		else if (node.type.equals("MAX"))
 		{
 			for (Link link: node.children)
-				determineIntermediates(link.node);
+				determineIntermediates(link.lowerNode);
 			Node greatest = node.greatest();
 			node.value = greatest.value;
 			greatest.parent.preferred = true;

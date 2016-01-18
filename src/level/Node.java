@@ -39,11 +39,11 @@ public class Node
 			System.err.println("No children for node " + toString());
 			return null;
 		}
-		Node candidate = children.get(0).node;
+		Node candidate = children.get(0).lowerNode;
 		if (children.size() == 1) return candidate;
 		for (int i = 1; i < children.size(); i++)
 		{
-			if (Math.signum(children.get(i).node.compareTo(candidate)) == value) candidate = children.get(i).node;
+			if (Math.signum(children.get(i).lowerNode.compareTo(candidate)) == value) candidate = children.get(i).lowerNode;
 		}
 		return candidate;
 	}

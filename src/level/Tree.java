@@ -21,7 +21,7 @@ public class Tree {
 		for (int i = 0; i < children.length; i++)
 		{
 			Node newNode = new Node(type, children[i]);
-			node.children.add(new Link(newNode));
+			node.children.add(new Link(node, newNode));
 		}
 	}
 	
@@ -32,10 +32,13 @@ public class Tree {
 	}
 	public void clearNodeLink(Node node, Link link) 
 	{
-		link.node.value = -9999;
-		link.node.parent = null;
-		link.node = null;
+		link.lowerNode.value = -9999;
+		link.lowerNode.parent = null;
+		link.lowerNode = null;
 		node.children.remove(link);
+		link.upperNode = null;
+		link.preferred = false;
+		link.linkValue = -9999;
 	}
 	public void clearAllNodeChildren(Node node)
 	{
@@ -84,7 +87,7 @@ public class Tree {
 			ArrayList<Node> newNodes = new ArrayList<Node>();
 			for (Node node: nodes)
 				for (Link link: node.children)
-					newNodes.add(link.node);
+					newNodes.add(link.lowerNode);
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
 		}
 	}
@@ -101,7 +104,7 @@ public class Tree {
 				/*ArrayList<Node> otherNodes = findPathOfPreference(link.node);
 				for (Node n: otherNodes)
 					nodes.add(n);*/
-				return findPathOfPreference(chosen, link.node);
+				return findPathOfPreference(chosen, link.lowerNode);
 			}
 		return chosen; 
 	}

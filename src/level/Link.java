@@ -10,7 +10,7 @@ public class Link {
 	{
 		upperNode = upper;
 		lowerNode = lower;
-		n.parent = this;
+		lowerNode.parent = this;
 	}
 	
 }
