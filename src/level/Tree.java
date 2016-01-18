@@ -24,7 +24,7 @@ public class Tree {
 			node.children.add(new Link(node, newNode));
 		}
 	}
-	
+
 	public void clearNodeChild(Node node, Node child)
 	{
 		Link link = child.parent;
@@ -51,7 +51,7 @@ public class Tree {
 
 	public void clearAllButTerminal()
 	{
-		//ALT: A recursive that simply calls children. Preorder traversal
+		//ALT: A recursive method that simply calls children. Preorder traversal
 		ArrayList<ArrayList<Node>> nodeSets = new ArrayList<ArrayList<Node>>();
 		int depth = 0; //Find depth of lowest member
 		while (true)
@@ -90,6 +90,54 @@ public class Tree {
 					newNodes.add(link.lowerNode);
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
 		}
+	}
+	public ArrayList<ArrayList<Node>> findNodesDepthSeparated(int depth)
+	{
+		/*if (nodes == null)
+		{
+			nodes = new ArrayList<ArrayList<Node>>();
+			ArrayList<Node> temp = new ArrayList<Node>(); //Make creating a new arraylist a utility?
+			temp.add(first);
+			nodes.add(temp);
+		}
+		if (depth == 0)
+			return nodes;
+		else
+		{
+			ArrayList<ArrayList<Node>> newNodes = new ArrayList<ArrayList<Node>>();
+			for (ArrayList<Node> parentNodes: nodes)
+			{
+				for (Node node: parentNodes)
+				{
+					ArrayList<Node> lowerNodes = new ArrayList<Node>();
+					for (Link link: node.children)
+						lowerNodes.add(link.lowerNode);
+					newNodes.add(lowerNodes);
+				}
+			}
+			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
+		}*/
+		ArrayList<Node> nodes = findNodesDepth(depth);
+		int[] parentIndex = new int[nodes.size()];
+		ArrayList<Node> foundParents = new ArrayList<Node>();
+		for (int i = 0; i < nodes.size(); i++)
+		{
+			Node n = nodes.get(i);
+			Node parent = n.parent.upperNode;
+			int index = foundParents.indexOf(parent);
+			if (index == -1) //Add it to the list of parents if it wasn't already found
+			{
+				foundParents.add(parent);
+				index = foundParents.size() - 1;
+			}
+			parentIndex[i] = index;
+		}
+		ArrayList<ArrayList<Node>> separatedNodes = new ArrayList<ArrayList<Node>>();
+		for (int i = 0; i < foundParents.size(); i++)
+			separatedNodes.add(new ArrayList<Node>());
+		for (int i = 0; i < nodes.size(); i++)
+			separatedNodes.get(parentIndex[i]).add(nodes.get(i));
+		return separatedNodes;
 	}
 
 	private ArrayList<Node> findPathOfPreference(ArrayList<Node> chosen, Node node)
@@ -144,15 +192,19 @@ public class Tree {
 				{
 					if (node.parent.preferred)
 					{
-						System.out.print(node.toString() + "< ");
+						System.out.print(node.toString() + "<");
 					}
 					else
 					{
-						System.out.print(node.toString() + "  ");
+						System.out.print(node.toString() + " ");
 					}
 				}
 				else
-					System.out.print(node.toString() + "  ");
+					System.out.print(node.toString() + " ");
+				if (j == nodes.size() - 1)
+					System.out.print(" ");
+				else
+					System.out.print("-");
 			}
 			System.out.println();
 			i++;

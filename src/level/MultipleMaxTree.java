@@ -44,10 +44,11 @@ public class MultipleMaxTree extends Tree {
 				{
 					values[j] = current.value;
 					current = current.parent.upperNode;
+					//System.out.println(values[j]);
 				}
 				Node parent = node.parent.upperNode;
-				clearNodeChild(parent, node);
 				populateNodeMulti(parent, values);
+				clearNodeChild(parent, node);
 			}
 		}
 

@@ -35,7 +35,7 @@ public class NodeType {
 			type = t;
 	}
 	
-	
+	public boolean equals(NodeType type) {return type.equals(type.type);}
 	public boolean equals(String t) {return type.equals(t);}
 	public boolean contains(String t) {return type.contains(t);}
 	public String toString() {return type;}

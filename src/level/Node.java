@@ -26,6 +26,11 @@ public class Node
 	{
 		return new Double(value).compareTo(node.value);
 	}
+	
+	public boolean equals(Node other)
+	{
+		return type.equals(other.type) && value == other.value;
+	}
 
 	public Node(NodeType t, int v) {type = t; value = v;}
 

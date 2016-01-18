@@ -10,7 +10,7 @@ public class MinimaxTree extends Tree {
 	public static void main(String[] args)
 	{
 		//NodeType.init();
-		new MinimaxTree(5, 3).test();
+		new MinimaxTree(4, 2).test();
 	}
 
 	public MinimaxTree(int levels, int branching)
@@ -40,7 +40,7 @@ public class MinimaxTree extends Tree {
 				{
 					int[] children = new int[branching];
 					for (int k = 0; k < branching; k++)
-						children[k] = i*j*k + (int)(Math.random()*50);
+						children[k] = 10 + i*j*k + (int)(Math.random()*50);
 					populateNodeChildren(nodes.get(j),type,children);
 				}
 			}
