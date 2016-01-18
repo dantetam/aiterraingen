@@ -55,6 +55,39 @@ public class MultipleMaxTree extends Tree {
 		//clearAllButTerminal();
 	}
 
+	public void printDepthTraverse()
+	{
+		int i = 0;
+		while (true)
+		{
+			ArrayList<ArrayList<Node>> allNodes = findNodesDepthSeparated(i);
+			if (allNodes.isEmpty()) break;
+			for (ArrayList<Node> set: allNodes)
+			{
+				for (int j = 0; j < set.size(); j++)
+				{
+					Node node = set.get(j);
+					if (node.parent != null)
+					{
+						String temp = node.toString();
+						temp += node.parent.preferred ? "<" : " ";
+						temp += j == set.size() - 1 ? "  " : " -";
+						System.out.print(temp);
+					}
+					else
+						System.out.print(node.toString() + "  ");
+					/*if (j == nodes.size() - 1)
+					System.out.print(" ");
+				else
+					System.out.print("-");*/
+				}
+				System.out.print(" ");
+			}
+			System.out.println();
+			i++;
+		}
+	}
+
 	public void populateNodeMulti(Node node, double[] values)
 	{
 		MultiNode newNode = new MultiNode(values);

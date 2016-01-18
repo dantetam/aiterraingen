@@ -117,7 +117,17 @@ public class Tree {
 			}
 			return findNodesDepth(newNodes, depth-1); //--depth doesn't look as good
 		}*/
+		//Seems a little unnecessarily complex...
 		ArrayList<Node> nodes = findNodesDepth(depth);
+		ArrayList<ArrayList<Node>> separatedNodes = new ArrayList<ArrayList<Node>>();
+		if (nodes.contains(first))
+		{
+			ArrayList<Node> temp = new ArrayList<Node>();
+			temp.add(first);
+			separatedNodes.add(temp);
+			return separatedNodes;
+		}
+		if (nodes.isEmpty()) return separatedNodes;
 		int[] parentIndex = new int[nodes.size()];
 		ArrayList<Node> foundParents = new ArrayList<Node>();
 		for (int i = 0; i < nodes.size(); i++)
@@ -132,7 +142,6 @@ public class Tree {
 			}
 			parentIndex[i] = index;
 		}
-		ArrayList<ArrayList<Node>> separatedNodes = new ArrayList<ArrayList<Node>>();
 		for (int i = 0; i < foundParents.size(); i++)
 			separatedNodes.add(new ArrayList<Node>());
 		for (int i = 0; i < nodes.size(); i++)
@@ -201,10 +210,10 @@ public class Tree {
 				}
 				else
 					System.out.print(node.toString() + " ");
-				if (j == nodes.size() - 1)
+				/*if (j == nodes.size() - 1)
 					System.out.print(" ");
 				else
-					System.out.print("-");
+					System.out.print("-");*/
 			}
 			System.out.println();
 			i++;
