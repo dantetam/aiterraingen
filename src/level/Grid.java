@@ -2,13 +2,13 @@ package level;
 
 import java.util.ArrayList;
 
+import ai_ml.ProtectedGridP;
 import entity.BaseEntity;
 import game.Civilization;
 import game.Pathfinder;
 
-public class Grid {
+public class Grid extends ProtectedGridP<Tile> {
 
-	protected Tile[][] tiles;
 	public Civilization[] civs;
 	protected Pathfinder pathfinder;
 	public Intelligence intelligence;
@@ -67,14 +67,14 @@ public class Grid {
 		return pathfinder.findPath(unit.owner, a, b, c, d, true);
 	}
 
-	public Tile getTile(int r, int c)
+	/*public Tile getTile(int r, int c)
 	{
 		if (r >= 0 && r < tiles.length && c >= 0 && c < tiles[0].length)
 			return tiles[r][c];
 		return null;
 	}
 	public int rows;
-	public int cols;
+	public int cols;*/
 
 	public Tile[] settlerSpots(Civilization civ, Tile t, double dist, int resultLength)
 	{

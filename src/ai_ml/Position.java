@@ -3,6 +3,7 @@ package ai_ml;
 public class Position {
 
 	public double x,y;
+	public GraphEntity occupant;
 	
 	public Position(double a, double b)
 	{
