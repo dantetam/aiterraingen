@@ -67,21 +67,21 @@ public class MultipleMaxTree extends Tree {
 				for (int j = 0; j < set.size(); j++)
 				{
 					Node node = set.get(j);
+					String temp = node.toString();
 					if (node.parent != null)
 					{
-						String temp = node.toString();
 						temp += node.parent.preferred ? "<" : " ";
-						temp += j == set.size() - 1 ? "  " : " -";
-						System.out.print(temp);
+						temp += j == set.size() - 1 ? " " : "-";
 					}
 					else
-						System.out.print(node.toString() + "  ");
+						temp += " ";
+					System.out.print(temp);
 					/*if (j == nodes.size() - 1)
 					System.out.print(" ");
 				else
 					System.out.print("-");*/
 				}
-				System.out.print(" ");
+				System.out.print("  ");
 			}
 			System.out.println();
 			i++;
