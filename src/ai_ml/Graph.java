@@ -6,15 +6,30 @@ public class Graph extends ProtectedGridP<Position> {
 	{
 		tiles = new Position[rows][cols];
 		init(rows,cols);
-		for (int i = 0; i < 50; i++)
+		int count = 100;
+		for (int i = 0; i < count; i++)
 		{
 			Position pos = null;
 			do
 			{
 				pos = getTile((int)(Math.random()*rows), (int)(Math.random()*cols));
 			} while (pos.occupant == null);
-			GraphEntity en = new GraphEntity(GraphEntityType.BLUE);
+			GraphEntityType type = i >= count/2 ? GraphEntityType.BLUE : GraphEntityType.ORANGE;
+			GraphEntity en = new GraphEntity(type);
 			move(en, pos);
+		}
+		determineTileBias();
+	}
+	
+	public void determineTileBias()
+	{
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				Position pos = getTile(r,c);
+				
+			}
 		}
 	}
 	

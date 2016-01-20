@@ -52,4 +52,16 @@ public class Node
 		}
 		return candidate;
 	}
+	private static Comparable leastOrGreatest(ArrayList<Comparable> list, int value)
+	{
+		if (list.size() == 0) return null;
+		if (list.size() == 1) return list.get(0);
+		Comparable candidate = list.get(0);
+		for (int i = 1; i < list.size(); i++)
+		{
+			if (Math.signum(list.get(i).compareTo(candidate)) == value) candidate = list.get(i);
+		}
+		return candidate;
+	}
+
 }

@@ -4,6 +4,7 @@ public class Position {
 
 	public double x,y;
 	public GraphEntity occupant;
+	public GraphEntityType bias;
 	
 	public Position(double a, double b)
 	{
