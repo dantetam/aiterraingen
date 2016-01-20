@@ -3,7 +3,7 @@ package level;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-public class Node
+public class Node implements Comparable
 {
 	public NodeType type;
 	public double value;
@@ -44,12 +44,17 @@ public class Node
 			System.err.println("No children for node " + toString());
 			return null;
 		}
-		Node candidate = children.get(0).lowerNode;
+		if (children.size() == 1) return children.get(0).lowerNode;
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		for (Link n: children)
+			nodes.add(n.lowerNode);
+		Node candidate = leastOrGreatest(nodes,value);
+		/*Node candidate = children.get(0).lowerNode;
 		if (children.size() == 1) return candidate;
 		for (int i = 1; i < children.size(); i++)
 		{
 			if (Math.signum(children.get(i).lowerNode.compareTo(candidate)) == value) candidate = children.get(i).lowerNode;
-		}
+		}*/
 		return candidate;
 	}
 	private static Comparable leastOrGreatest(ArrayList<Comparable> list, int value)
@@ -62,6 +67,12 @@ public class Node
 			if (Math.signum(list.get(i).compareTo(candidate)) == value) candidate = list.get(i);
 		}
 		return candidate;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		System.err.println("Not comparing node properly to other node");
+		return 0;
 	}
 
 }

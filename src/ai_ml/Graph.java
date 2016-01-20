@@ -28,7 +28,7 @@ public class Graph extends ProtectedGridP<Position> {
 			for (int c = 0; c < cols; c++)
 			{
 				Position pos = getTile(r,c);
-				
+				Implement k-NN here
 			}
 		}
 	}
