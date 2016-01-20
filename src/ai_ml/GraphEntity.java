@@ -5,9 +5,9 @@ public class GraphEntity {
 	public Position pos;
 	public GraphEntityType type;
 	
-	public GraphEntity(Position p, GraphEntityType t)
+	public GraphEntity(GraphEntityType t)
 	{
-		pos = p;
+		//pos = p;
 		type = t;
 	}
 }

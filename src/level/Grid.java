@@ -18,16 +18,7 @@ public class Grid extends ProtectedGridP<Tile> {
 		tiles = new Tile[rows][cols];
 		this.rows = rows;
 		this.cols = cols;
-		for (int r = 0; r < rows; r++)
-		{
-			for (int c = 0; c < cols; c++)
-			{
-				Tile tile = new Tile(this,r,c);
-				tile.start((int)(Math.random()*6), (int)(Math.random()*6));
-				tile.improve(0, 0);
-				tiles[r][c] = tile;
-			}
-		}
+		init(rows,cols);
 		colorTilesAverage();
 
 		pathfinder = new Pathfinder(this);
@@ -50,6 +41,20 @@ public class Grid extends ProtectedGridP<Tile> {
 		}
 	}
 
+	public void init(int rows, int cols) 
+	{
+		for (int r = 0; r < rows; r++)
+		{
+			for (int c = 0; c < cols; c++)
+			{
+				Tile tile = new Tile(this,r,c);
+				tile.start((int)(Math.random()*6), (int)(Math.random()*6));
+				tile.improve(0, 0);
+				tiles[r][c] = tile;
+			}
+		}
+	}
+	
 	public void move(BaseEntity en, int r, int c)
 	{
 		if (en.location != null)

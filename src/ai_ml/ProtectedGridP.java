@@ -11,5 +11,7 @@ public abstract class ProtectedGridP<T> {
 			return null;
 		return tiles[r][c];
 	}
+	
+	public abstract void init(int rows, int cols);
 
 }
