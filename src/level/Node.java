@@ -1,9 +1,9 @@
 package level;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Collections;
 
-public class Node implements Comparable
+public class Node implements Comparable<Node>
 {
 	public NodeType type;
 	public double value;
@@ -57,22 +57,23 @@ public class Node implements Comparable
 		}*/
 		return candidate;
 	}
-	private static Comparable leastOrGreatest(ArrayList<Comparable> list, int value)
+	private static Node leastOrGreatest(ArrayList<Node> list, int value)
 	{
-		if (list.size() == 0) return null;
+		Collections.sort(list);
+		return list.get(0);
+		/*if (list.size() == 0) return null;
 		if (list.size() == 1) return list.get(0);
 		Comparable candidate = list.get(0);
 		for (int i = 1; i < list.size(); i++)
 		{
 			if (Math.signum(list.get(i).compareTo(candidate)) == value) candidate = list.get(i);
 		}
-		return candidate;
+		return candidate;*/
 	}
 
-	@Override
-	public int compareTo(Object o) {
+	/*public int compareTo(Comparable<Node> o) {
 		System.err.println("Not comparing node properly to other node");
 		return 0;
-	}
+	}*/
 
 }
