@@ -26,7 +26,7 @@ public class Graph extends ProtectedGridP<Position> {
 	public void determineTileBias()
 	{
 		ArrayList<GraphEntity> entities = new ArrayList<GraphEntity>();
-		ArrayList<Double> distances = new ArrayList<Double>();
+		ArrayList<EntityDistLink> distances = new ArrayList<EntityDistLink>();
 		int limit = 10;
 		for (int r = 0; r < rows; r++)
 			for (int c = 0; c < cols; c++)
@@ -52,13 +52,22 @@ public class Graph extends ProtectedGridP<Position> {
 					double dist = en.pos.dist(center);
 					for (int i = 0; i < limit; i++)
 					{
-						if (i >= distances.size() || dist < distances.get(i))
+						if (i >= distances.size() || dist < distances.get(i).dist)
 						{
-							distances.add(i, dist);
+							distances.add(i, new EntityDistLink(en, dist));
 							break;
 						}
 					}
 				}
+				for (EntityDistLink link: distances)
+				{
+					if (link.en.type == GraphEntityType.BLUE)
+						blue++;
+					else if (link.en.type == GraphEntityType.ORANGE)
+						orange++;
+				}
+				if (blue > orange) center.bias = GraphEntityType.BLUE;
+				else center.bias = GraphEntityType.ORANGE;
 			}
 		}
 	}
