@@ -11,7 +11,7 @@ public class Grid extends ProtectedGridP<Tile> {
 
 	public Civilization[] civs;
 	protected Pathfinder pathfinder;
-	public Intelligence intelligence;
+	public Intelligence intelligence = new Intelligence();
 
 	public Grid(int rows, int cols, int numCivs)
 	{

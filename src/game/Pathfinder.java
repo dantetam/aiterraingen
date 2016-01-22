@@ -195,7 +195,7 @@ public class Pathfinder {
 			this.r = r;
 			this.c = c;
 			g = 0;
-			nodes[r][c].parent = null;
+			parent = null;
 			queue = 0;
 		}
 		public boolean equals(Node n){return r == n.r && c == n.c;}

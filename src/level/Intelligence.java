@@ -20,6 +20,7 @@ public class Intelligence {
 	public double turnsEntityToTile(BaseEntity en, Tile t)
 	{
 		ArrayList<Tile> path = en.location.grid.findPath(en, en.location.row, en.location.col, t.row, t.col);
+		if (path == null || path.size() == 0) return 9999;
 		return Math.ceil((double)path.size()/(double)en.maxAction);
 	}
 
@@ -35,9 +36,9 @@ public class Intelligence {
 				for (int cc = en.location.col - 2; cc <= en.location.col + 2; cc++)
 				{
 					Tile t = en.location.grid.getTile(rr,cc);
-					if (t.foodImpr > 0 || t.metalImpr > 0 || queueToImpr.contains(t)) continue; //Skip if improved or about to be improved
 					if (t != null)
 					{
+						if (t.foodImpr > 0 || t.metalImpr > 0 || queueToImpr.contains(t)) continue; //Skip if improved or about to be improved
 						int turnsCandidate = (int)turnsEntityToTile(en, t);
 						int[] impr = Tile.getImprovement(t.biome, t.resource);
 						double gainPerTurnCandidate = (impr[0]+impr[1])/turnsCandidate;
