@@ -24,6 +24,7 @@ public class BaseEntity {
 		this.name = name;
 	}
 
+	private Action temp = new Action("temp",-9999);
 	public void tick()
 	{
 		do
@@ -39,13 +40,13 @@ public class BaseEntity {
 					double workerScore = intel.scoreFromWorkerPerTurn(this, (int)settleData[1]);
 					if (settlerScore >= workerScore)
 					{
-						queueAction.add(new Action.QueueAction(5*maxAction, "Settler"));
-						queueAction.add(new Action.MakeAction(1*maxAction, "Settler"));
+						queueAction.add(temp.new QueueAction(5*maxAction, "Settler"));
+						queueAction.add(temp.new MakeAction(1*maxAction, "Settler"));
 					}
 					else
 					{
-						queueAction.add(new Action.QueueAction(5*maxAction, "Worker"));
-						queueAction.add(new Action.MakeAction(1*maxAction, "Worker"));
+						queueAction.add(temp.new QueueAction(5*maxAction, "Worker"));
+						queueAction.add(temp.new MakeAction(1*maxAction, "Worker"));
 					}
 				}
 				if (queueAction.size() > 0)
@@ -69,7 +70,7 @@ public class BaseEntity {
 			{
 				if (name.equals("Settler"))
 				{
-					if (queueTiles.size() == 0)
+					if (queueAction.isEmpty())
 					{
 						Tile[] locations = location.grid.settlerSpots(owner, location, 10, 5);
 						for (int i = 0; i < locations.length; i++)
@@ -78,18 +79,24 @@ public class BaseEntity {
 							ArrayList<Tile> path = location.grid.findPath(this, location.row, location.col, desired.row, desired.col);
 							if (path != null)
 							{
-								queueTiles = path;
+								for (Tile t: path)
+									queueAction.add(temp.new MoveAction(1, t));
 								break;
 							}
 						}
 					}
-					if (queueTiles.size() > 0)
+					if (!queueAction.isEmpty())
 					{
-						if (queueTiles.size() == 0) break;
-						Tile t = queueTiles.remove(0);
-						location.grid.move(this, t.row, t.col);
+						//if (queueTiles.size() == 0) break;
+						Action currentAction = queueAction.remove(0);
+						if (currentAction instanceof Action.MoveAction)
+						{
+							Action.MoveAction moveAction = (Action.MoveAction)currentAction;
+							Tile t = moveAction.location;
+							location.grid.move(this, t.row, t.col);
+						}
 					}
-					if (queueTiles.size() == 0)
+					if (queueAction.size() == 0)
 					{
 						improvement = true;
 					}

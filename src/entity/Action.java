@@ -2,7 +2,7 @@ package entity;
 
 import level.Tile;
 
-public abstract class Action {
+public class Action {
 
 	public double costAction; 
 	public String type;
