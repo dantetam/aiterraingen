@@ -4,17 +4,17 @@ import level.Tile;
 
 public abstract class Action {
 
-	public double cost; 
+	public double costAction; 
 	public String type;
 	
 	public Action(String t, double c)
 	{
 		type = t;
-		cost = c;
+		costAction = c;
 	}
 	
-	public class MoveAction extends Action {public Tile location; public MoveAction(String t, double c, Tile tile) {super(t,c); location = tile;}}
-	public class MakeAction extends Action {public String unit; public MakeAction(String t, double c, String u) {super(t,c); unit = u;}}
-	public class QueueAction extends Action {public String unit; public QueueAction(String t, double c, String u) {super(t,c); unit = u;}}
+	public class MoveAction extends Action {public Tile location; public MoveAction(double c, Tile tile) {super("MoveAction",c); location = tile;}}
+	public class MakeAction extends Action {public String unit; public MakeAction(double c, String u) {super("MakeAction",c); unit = u;}}
+	public class QueueAction extends Action {public String unit; public QueueAction(double c, String u) {super("QueueAction",c); unit = u;}}
 	
 }

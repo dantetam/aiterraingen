@@ -12,10 +12,10 @@ public class BaseEntity {
 	public Civilization owner;
 
 	public String name;
-	public ArrayList<String> queueAction = new ArrayList<String>();
+	public ArrayList<Action> queueAction = new ArrayList<Action>();
 	public boolean improvement = false;
 	public double action = 2, maxAction = 2;
-	public ArrayList<Tile> queueTiles = new ArrayList<Tile>();
+	//public ArrayList<Tile> queueTiles = new ArrayList<Tile>();
 
 	public BaseEntity(Civilization civ, String name)
 	{
@@ -39,25 +39,28 @@ public class BaseEntity {
 					double workerScore = intel.scoreFromWorkerPerTurn(this, (int)settleData[1]);
 					if (settlerScore >= workerScore)
 					{
-						for (int i = 0; i < 5; i++)
-							queueAction.add("QueueSettler");
-						queueAction.add("MakeSettler");
+						queueAction.add(new Action.QueueAction(5*maxAction, "Settler"));
+						queueAction.add(new Action.MakeAction(1*maxAction, "Settler"));
 					}
 					else
 					{
-						for (int i = 0; i < 5; i++)
-							queueAction.add("QueueWorker");
-						queueAction.add("MakeWorker");
+						queueAction.add(new Action.QueueAction(5*maxAction, "Worker"));
+						queueAction.add(new Action.MakeAction(1*maxAction, "Worker"));
 					}
 				}
 				if (queueAction.size() > 0)
 				{
-					String actionName = queueAction.remove(0);
-					if (actionName.contains("Queue"))
-						action = 0;
-					else if (actionName.contains("Make"))
+					Action currentAction = queueAction.remove(0);
+					if (currentAction instanceof Action.QueueAction)
 					{
-						BaseEntity en = new BaseEntity(owner, actionName.substring(4));
+						action = 0;
+						currentAction.costAction -= maxAction;
+					}
+					else if (currentAction instanceof Action.QueueAction)
+					{
+						Action.QueueAction queueAction = (Action.QueueAction)currentAction;
+						currentAction.costAction -= maxAction;
+						BaseEntity en = new BaseEntity(owner, queueAction.unit);
 						location.grid.move(en, location.row, location.col);
 					}
 				}
