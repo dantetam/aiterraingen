@@ -19,9 +19,15 @@ public class VariableDiPerlin {
 	 * 
 	 */
 	
+	private int dim = 0;
 	public double[] generateNoise(int levels, double persistence, int... dimensions)
 	{
+		dim = dimensions.length;
 		double[][] noises = new double[levels][];
+		for (int i = 0; i < levels; i++)
+		{
+			
+		}
 	}
 	
 }
