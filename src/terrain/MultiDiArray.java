@@ -9,7 +9,7 @@ public class MultiDiArray<T> implements Iterable<T> {
 	public int length;
 	private T[] data;
 	
-	public MultiDiArray(int size, int... dimensions)
+	public MultiDiArray(int... dimensions)
 	{
 		length = 1;
 		for (int dim: dimensions)
@@ -48,7 +48,7 @@ public class MultiDiArray<T> implements Iterable<T> {
 		return data[index];
 	}
 
-	public class MultiDiArrayIterator<T> implements Iterator<T>
+	public class MultiDiArrayIterator implements Iterator<T>
 	{
 		public ArrayList<Integer> xyz = new ArrayList<Integer>();
 		public MultiDiArrayIterator() {for (int i = 0; i < dimensions.length; i++) xyz.add(new Integer(0));}
@@ -73,7 +73,6 @@ public class MultiDiArray<T> implements Iterable<T> {
 				}
 				else break;
 			}
-			if (!hasNext()) return null;
 			return temp;
 		}
 		@Override
@@ -84,6 +83,13 @@ public class MultiDiArray<T> implements Iterable<T> {
 	}
 	public Iterator<T> iterator() {
 		return new MultiDiArrayIterator();
+	}
+	
+	public static void main(String[] args)
+	{
+		MultiDiArray test = new MultiDiArray(4,6);
+		System.out.println(test.get(1,2));
+		
 	}
 	
 }
